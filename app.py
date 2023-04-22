@@ -23,12 +23,16 @@ layoutDois = [
     [sg.Button('Reg')]
 
 ]
-#Nome da tela
+
+#Array que recebe os valores
+lista_produtos = []
+
+#Tela de login
 janela = sg.Window('Tela de login', layout)
 
 
 #FUNCOES
-
+#Itera sobre os valores do produtos.txt e preenche os inputs automaticamente
 def login(): 
     pyautogui.click(929,529,duration=2)
     pyautogui.write('c')
@@ -39,29 +43,26 @@ def login():
     
     pyautogui.click(875,620,duration=2) 
 
+    
     with open('produtos.txt','r') as file:
         for linha in file:
             produto = linha.split(',')[0]
             quantidade = linha.split(',')[1]
             preco = linha.split(',')[2]
 
-            pyautogui.click(845,510,duration=2)
+            pyautogui.click(799,240,duration=2)
             pyautogui.write(produto)
 
-            pyautogui.click(851,540,duration=2)
+            pyautogui.click(797,269,duration=2)
             pyautogui.write(quantidade)
 
-            pyautogui.click(848,568,duration=2)
+            pyautogui.click(797,298,duration=2)
             pyautogui.write(preco)
 
-            pyautogui.click(776,636,duration=2)
-
-
-
-    
-
-
-
+            pyautogui.click(705,905,duration=2)
+            pyautogui.click(705,905,duration=1)
+            
+#Limpa os inputs pra permitir entrada de novos valores
 def limpar():
     jan['produto'].update('')
     jan['quantidade'].update('')
@@ -70,10 +71,11 @@ def limpar():
 
 
 #Lendo as infos do layout e criando a interface
+#Atribuindo ao multiline os valores dos inputs
 
 while True:
-    # t = Timer(2.0, login)
-    # t.start()
+    t = Timer(2.0, login)
+    t.start()
 
     eventos, valores = janela.read()
     
@@ -82,17 +84,24 @@ while True:
         break
     if eventos == 'Entrar':      
         if valores['usuario'] == 'c' and valores['senha'] == '1':
+              janela.hide()
+
               jan = sg.Window('Tela de cadastro', layoutDois)
+             
+        while True:
               ev, values = jan.read()
-        if ev == 'Reg':
-            prod = values['produto']
-            qtd = values['quantidade']
-            preco = values['preco']
-            saida = f'Produto: {prod}, Quantidade: {qtd}, Preco: {preco}'
-            jan['Input'].update(saida)
+              if ev == 'Reg':
+                  prod = values['produto']
+                  qtd = values['quantidade']
+                  preco = values['preco']
+                  saida = f'Produto: {prod}, Quantidade: {qtd}, Preco: {preco}'
+                  lista_produtos.append(saida)
+                  jan['Input'].update('\n'.join(lista_produtos))
+                  
+                  limpar()
+                  jan.read()
             
-            limpar()
-            jan.read()
+    
     
     
 
