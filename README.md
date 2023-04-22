@@ -23,5 +23,6 @@ Instalando os pacotes:
 
 <em>Video demonstração abaixo:</em> 
 <br/>
-![bandicam 2023-04-22 13-27-22-864_Trim](https://user-images.githubusercontent.com/101435336/233796052-f8e4ad64-a3a1-420c-9fba-d09969281efc.gif)
+![bandicam 2023-04-22 13-27-22-864_Trim (2)](https://user-images.githubusercontent.com/101435336/233797022-7384bd5f-ad6d-41de-8b5d-f039148e880f.gif)
+
 
